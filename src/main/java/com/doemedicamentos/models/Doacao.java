@@ -11,15 +11,13 @@ public class Doacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDocacao;
-    @DateTimeFormat
-    @NotNull
+    @NotNull(message = "Data de vencimento do medicamento deve ser preenchida.")
     private Date dataValidade;
-    @DateTimeFormat
-    @NotNull
+    @NotNull(message = "Data do cadastro do medicamento deve ser preenchida.")
     private Date dataCadastro;
 
-    //@OneToMany
-    //private Medicamento medicamento;
+    @OneToOne
+    private Medicamento medicamento;
 
     public Doacao() {
     }
@@ -54,12 +52,11 @@ public class Doacao {
         this.dataCadastro = dataCadastro;
     }
 
-    /*
     public Medicamento getMedicamento() {
         return medicamento;
     }
 
     public void setMedicamento(Medicamento medicamento) {
         this.medicamento = medicamento;
-    }*/
+    }
 }

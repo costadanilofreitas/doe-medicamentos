@@ -1,8 +1,8 @@
 package com.doemedicamentos.services;
 
 import com.doemedicamentos.models.Doacao;
+import com.doemedicamentos.models.Medicamento;
 import com.doemedicamentos.repositories.DoacaoRepository;
-import net.minidev.asm.ConvertDate;
 import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import javax.management.InvalidAttributeValueException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,12 +29,19 @@ public class DoacaoServiceTests {
     DoacaoService doacaoService;
 
     Doacao doacao;
+    Medicamento medicamento;
 
     @BeforeEach
     public void inicializar() throws ParseException{
         DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
         Date date = (Date)formatter.parse("09/29/20");
         Doacao doacao = new Doacao(1, date, date);
+        medicamento = new Medicamento();
+        medicamento.setId(1);
+        medicamento.setNome("Tecfidera");
+        medicamento.setControlado(true);
+        medicamento.setLaboratorio("Biogen Brasil Produtos");
+        doacao.setMedicamento(medicamento);
     }
 
     @Test
@@ -85,8 +91,17 @@ public class DoacaoServiceTests {
     }
 
     @Test
-    public void testarDeletarInvestimento(){
+    public void testarDeletarDoacao(){
         doacaoService.excluirDoacao(doacao);
         Mockito.verify(doacaoRepository, Mockito.times(1)).delete(Mockito.any(Doacao.class));
+    }
+
+    @Test
+    public void testarBuscarDoacaoPorMedicamento(){
+        Mockito.when(doacaoRepository.findAll()).thenReturn(Arrays.asList(doacao));
+        List<Doacao> doacaos = doacaoService.buscarDoacaoPorMedicamento(1);
+        Assertions.assertEquals(1, doacaos.size());
+        Assertions.assertEquals("Tecfidera", doacaos.get(0).getMedicamento().getNome());
+
     }
 }

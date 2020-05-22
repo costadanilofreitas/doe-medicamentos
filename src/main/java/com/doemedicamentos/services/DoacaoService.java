@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,8 +44,14 @@ public class DoacaoService {
         doacaoRepository.delete(doacao);
     }
 
-    /*
-    public Iterable<Doacao> buscarDoacaoPorMedicamento(){
-    }*/
-
+    public List<Doacao> buscarDoacaoPorMedicamento(int idMedicacao){
+        Iterable<Doacao> doacaoAll = doacaoRepository.findAll();
+        List<Doacao> doacoesMedicamento = new ArrayList<>();
+        for(Doacao doacao : doacaoAll){
+            if(doacao.getMedicamento().getId() == idMedicacao){
+                doacoesMedicamento.add(doacao);
+            }
+        }
+        return doacoesMedicamento;
+    }
 }
