@@ -35,7 +35,10 @@ public class DoacaoServiceTests {
     public void inicializar() throws ParseException{
         DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
         Date date = (Date)formatter.parse("09/29/20");
-        Doacao doacao = new Doacao(1, date, date);
+        Date dataCadastro = new Date();
+        doacao = new Doacao();
+        doacao.setDataValidade(date);
+        doacao.setDataCadastro(dataCadastro);
         medicamento = new Medicamento();
         medicamento.setId(1);
         medicamento.setNome("Tecfidera");
@@ -53,12 +56,15 @@ public class DoacaoServiceTests {
 
     @Test
     public void testarIncluirDoacaoErro(){
+        Date date = new Date();
+        doacao.setDataValidade(date);
         Mockito.when(doacaoRepository.save(Mockito.any(Doacao.class))).thenReturn(doacao);
         Assertions.assertThrows(ObjectNotFoundException.class, () -> {doacaoService.incluirDoacao(doacao);});
     }
 
     @Test
     public void  testarBuscarDoacaoPorId(){
+        doacao.setIdDocacao(1);
         Optional<Doacao> retorno = Optional.of(doacao);
         Mockito.when(doacaoRepository.findById(Mockito.anyInt())).thenReturn(retorno);
         Optional<Doacao> doacaoObjeto = doacaoService.buscarDoacaoPorId(1);
@@ -67,6 +73,7 @@ public class DoacaoServiceTests {
 
     @Test
     public void testarBuscarTodasDoacoes(){
+        doacao.setIdDocacao(1);
         Mockito.when(doacaoRepository.findAll()).thenReturn(Arrays.asList(doacao));
         Iterable<Doacao> doacaoIterable = doacaoService.buscarTodasDoacoes();
         List<Doacao> retorno = (List)doacaoIterable;
@@ -76,6 +83,7 @@ public class DoacaoServiceTests {
 
     @Test
     public void testarAlterarDoacao()throws ParseException{
+        doacao.setIdDocacao(1);
         Doacao doacaoAtualizado = new Doacao();
         doacaoAtualizado.setIdDocacao(1);
         Doacao doacaoComAlteracao = new Doacao();
@@ -87,11 +95,12 @@ public class DoacaoServiceTests {
         Mockito.when(doacaoRepository.findById(Mockito.anyInt())).thenReturn(retorno);
         Mockito.when(doacaoRepository.save(Mockito.any(Doacao.class))).thenReturn(doacaoComAlteracao);
         Doacao doacaoObjeto = doacaoService.alterarDoacao(doacaoComAlteracao);
-        Assertions.assertEquals(doacaoAtualizado.getDataValidade(), doacaoObjeto.getDataValidade());
+        Assertions.assertEquals(doacaoComAlteracao.getDataValidade(), doacaoObjeto.getDataValidade());
     }
 
     @Test
     public void testarDeletarDoacao(){
+        doacao.setIdDocacao(1);
         doacaoService.excluirDoacao(doacao);
         Mockito.verify(doacaoRepository, Mockito.times(1)).delete(Mockito.any(Doacao.class));
     }
