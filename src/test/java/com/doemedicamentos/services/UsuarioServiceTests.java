@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
@@ -70,6 +72,24 @@ public class UsuarioServiceTests {
         Iterable<Usuario> usuarios = usuarioService.buscarUsuarios();
         Mockito.verify(usuarioRepository).findAll();
         Assertions.assertEquals(usuarios,usuarioIterable);
+
+    }
+
+    @Test
+    public void testarLoadUserByUsernameInexistente(){
+        Mockito.when(usuarioRepository.findByEmail(Mockito.any())).thenReturn(null);
+        Assertions.assertThrows(UsernameNotFoundException.class,
+                () -> usuarioService.loadUserByUsername(usuario.getEmail()),
+                "Esse email já existe");
+
+    }
+
+    @Test
+    public void testarLoadUserByUsername(){
+        Mockito.when(usuarioRepository.findByEmail(Mockito.any())).thenReturn(usuario);
+        UserDetails userDetails = usuarioService.loadUserByUsername(usuario.getEmail());
+        Assertions.assertEquals(userDetails.getUsername(), usuario.getEmail());
+        Assertions.assertEquals(userDetails.getPassword(), usuario.getSenha());
 
     }
 
