@@ -1,7 +1,9 @@
 package com.doemedicamentos.controllers;
 
 import com.doemedicamentos.models.Medicamento;
+import com.doemedicamentos.security.JWTUtil;
 import com.doemedicamentos.services.MedicamentoService;
+import com.doemedicamentos.services.UsuarioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.hibernate.ObjectNotFoundException;
@@ -11,7 +13,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -20,9 +24,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @WebMvcTest(MedicamentoController.class)
+@Import(JWTUtil.class
+)
 public class MedicamentoControllerTests {
     @MockBean
     MedicamentoService medicamentoService;
+    @MockBean
+    UsuarioService usuarioService;
+
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,6 +49,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarIncluirMedicamento() throws Exception {
 
         Mockito.when(medicamentoService.incluirMedicamento(Mockito.any(Medicamento.class))).thenReturn(medicamento);
@@ -54,6 +64,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarTodosMedicamentos() throws Exception {
 
         Iterable<Medicamento> medicamentoIterable = Arrays.asList(medicamento);
@@ -70,6 +81,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarNaoEncontrarBuscarTodosMedicamentos() throws Exception {
         Iterable<Medicamento> medicamentoIterable = Arrays.asList();
 
@@ -83,6 +95,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarMedicamentoPorId() throws Exception {
         Optional<Medicamento> medicamentoOptional = Optional.of(medicamento);
 
@@ -96,6 +109,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarNaoEncontrarBuscarMedicamentoPorId() throws Exception {
         Optional<Medicamento> medicamentoOptional = Optional.empty();
 
@@ -108,6 +122,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarAtualizarMedicamento() throws Exception {
 
         Mockito.when(medicamentoService.atualizarMedicamento(Mockito.any(Medicamento.class))).thenReturn(medicamento);
@@ -123,6 +138,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarNaoEncontrarAtualizarMedicamento() throws Exception {
 
         Optional<Medicamento> medicamentoOptional = Optional.empty();
@@ -141,6 +157,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarDeletarMedicamento() throws Exception {
 
         Optional<Medicamento> medicamentoOptional = Optional.of(medicamento);
@@ -158,6 +175,7 @@ public class MedicamentoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarNaoEncontrarDeletarInvestimento() throws Exception {
 
         Optional<Medicamento> medicamentoOptional = Optional.empty();
