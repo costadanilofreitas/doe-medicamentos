@@ -2,6 +2,7 @@ package com.doemedicamentos.controllers;
 
 import com.doemedicamentos.models.Endereco;
 import com.doemedicamentos.models.Paciente;
+import com.doemedicamentos.services.EnderecoService;
 import com.doemedicamentos.services.PacienteService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,13 +19,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import javax.swing.text.html.Option;
-import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
-@WebMvcTest
+@WebMvcTest(PacienteController.class)
 public class PacienteControllerTests {
 
     @Autowired
@@ -48,20 +47,20 @@ public class PacienteControllerTests {
         paciente.setNome("Nome Paciente");
         paciente.setTelefone("11999999999");
 
+        endereco = new Endereco();
         endereco.setIdEndereco(1);
         endereco.setEndereco("Rua Rio Grande do Norte");
         endereco.setNumero("170");
         endereco.setEstado("São Paulo");
         endereco.setCidade("Santo André");
         endereco.setComplemento("apartamento 42");
+        paciente.setEndereco(endereco);
     }
 
     @Test
     public void testarIncluirPaciente() throws Exception {
 
-        Optional<Endereco> enderecoOptional = Optional.of(endereco);
-
-        Mockito.when(pacienteService.buscarEnderecoPorid(Mockito.anyInt())).thenReturn(enderecoOptional);
+        Mockito.when(pacienteService.vincularEndereco(Mockito.any(Endereco.class))).thenReturn(endereco);
 
         Mockito.when(pacienteService.incluirPaciente(Mockito.any(Paciente.class))).thenReturn(paciente);
 

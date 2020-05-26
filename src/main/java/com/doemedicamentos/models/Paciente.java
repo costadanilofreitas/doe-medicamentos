@@ -1,7 +1,10 @@
 package com.doemedicamentos.models;
 
+import net.bytebuddy.implementation.bind.annotation.Empty;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.xml.crypto.Data;
 import java.util.Date;

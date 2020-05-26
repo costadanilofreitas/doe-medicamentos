@@ -1,6 +1,8 @@
 package com.doemedicamentos.services;
 
+import com.doemedicamentos.models.Endereco;
 import com.doemedicamentos.models.Paciente;
+import com.doemedicamentos.repositories.EnderecoRepository;
 import com.doemedicamentos.repositories.PacienteRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
@@ -22,10 +24,18 @@ public class PacienteServiceTests {
     @MockBean
     PacienteRepository pacienteRepository;
 
+    @MockBean
+    EnderecoRepository enderecoRepository;
+
     @Autowired
     PacienteService pacienteService;
 
+    @Autowired
+    EnderecoService enderecoService;
+
     Paciente paciente;
+
+    Endereco endereco;
 
     @BeforeEach
     public void iniciar() throws ParseException {
@@ -35,6 +45,15 @@ public class PacienteServiceTests {
         paciente.setEmail("teste@gmail.com");
         paciente.setNome("Nome Paciente");
         paciente.setTelefone("11999999999");
+
+        endereco = new Endereco();
+        endereco.setIdEndereco(1);
+        endereco.setEndereco("Rua Rio Grande do Norte");
+        endereco.setNumero("170");
+        endereco.setEstado("São Paulo");
+        endereco.setCidade("Santo André");
+        endereco.setComplemento("apartamento 42");
+        paciente.setEndereco(endereco);
     }
 
     @Test
@@ -116,5 +135,42 @@ public class PacienteServiceTests {
         Mockito.when(pacienteRepository.findById(Mockito.anyInt())).thenReturn(pacienteOptional);
 
         Assertions.assertThrows(ObjectNotFoundException.class, () -> { pacienteService.excluirPaciente(paciente);});
+    }
+
+    @Test
+    public void testarVincularEnderecoPorId(){
+
+        Optional<Endereco> enderecoOptional = Optional.of(paciente.getEndereco());
+
+        Mockito.when(enderecoService.buscarPorid(Mockito.anyInt())).thenReturn(enderecoOptional);
+
+        Endereco enderecoObject = pacienteService.vincularEndereco(paciente.getEndereco());
+
+        Assertions.assertEquals(enderecoObject.getEstado(), paciente.getEndereco().getEstado());
+    }
+
+    @Test
+    public void testarVincularEnderecoPorEnderecoNovo(){
+
+        Mockito.when(enderecoService.incluirEndereco(Mockito.any(Endereco.class))).thenReturn(endereco);
+
+        Endereco enderecoNovo = endereco;
+        enderecoNovo.setIdEndereco(null);
+
+        Endereco enderecoObject = pacienteService.vincularEndereco(enderecoNovo);
+
+        Assertions.assertEquals(enderecoObject.getEstado(), enderecoNovo.getEstado());
+    }
+
+    @Test
+    public void testarVincularEnderecoSemEndereco(){
+
+        Endereco enderecoVazio = new Endereco();
+
+        Mockito.when(enderecoService.incluirEndereco(Mockito.any(Endereco.class))).thenReturn(enderecoVazio);
+
+        Endereco enderecoObject = pacienteService.vincularEndereco(enderecoVazio);
+
+        Assertions.assertEquals(enderecoObject.getEstado(), enderecoVazio.getEstado());
     }
 }

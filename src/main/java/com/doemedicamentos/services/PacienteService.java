@@ -16,16 +16,20 @@ public class PacienteService {
     PacienteRepository pacienteRepository;
 
     @Autowired
-    EnderecoService enderecoRepository;
+    EnderecoService enderecoService;
 
-    public Endereco incluirEndereco(Endereco endereco){
-        Endereco enderecoObjeto = enderecoRepository.incluirEndereco(endereco);
-        return enderecoObjeto;
-    }
+    public Endereco vincularEndereco(Endereco endereco){
 
-    public Optional<Endereco> buscarEnderecoPorid(Integer id){
-        Optional<Endereco> enderecoOptional = enderecoRepository.buscarPorid(id);
-        return enderecoOptional;
+        Integer idEndereco = endereco.getIdEndereco();
+        if(idEndereco != null){
+            Optional<Endereco> enderecoReal = enderecoService.buscarPorid(idEndereco);
+            return enderecoReal.get();
+        }
+        else if(endereco.getEndereco() != null){
+            Endereco enderecoReal = enderecoService.incluirEndereco(endereco);
+            return enderecoReal;
+        }
+        return new Endereco();
     }
 
     public Paciente incluirPaciente(Paciente paciente){

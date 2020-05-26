@@ -21,20 +21,13 @@ public class PacienteController {
     @PostMapping
     public ResponseEntity<Paciente> incluirPaciente(@RequestBody Paciente paciente){
 
+       Endereco endereco = pacienteService.vincularEndereco(paciente.getEndereco());
 
-        Integer idEndereco = paciente.getEndereco().getIdEndereco();
-        if(idEndereco != null){
-            Optional<Endereco> endereco = pacienteService.buscarEnderecoPorid(idEndereco);
-            paciente.setEndereco(endereco.get());
-        }
-        else if(paciente.getEndereco().getEndereco() != null){
-            Endereco endereco = pacienteService.incluirEndereco(paciente.getEndereco());
-            paciente.setEndereco(endereco);
-        }
+       paciente.setEndereco(endereco);
 
-        Paciente pacienteObject = pacienteService.incluirPaciente(paciente);
+       Paciente pacienteObject = pacienteService.incluirPaciente(paciente);
 
-        return ResponseEntity.status(201).body(pacienteObject);
+       return ResponseEntity.status(201).body(pacienteObject);
     }
 
     @GetMapping("/{id}")
