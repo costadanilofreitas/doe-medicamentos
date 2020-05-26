@@ -28,17 +28,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private JWTUtil jwtUtil;
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/endereco",
+            "/endereco/**",
+            "/doacao/**",
+            "/medicamentos/**",
+            "/reserva/**",
+            "/paciente/**",
             "/usuario/**"
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
-            "/endereco/**"
+            "/usuario/registrar",
+            "/endereco/incluir",
+            "/doacao/**",
+            "/reserva/**",
+            "/paciente/**",
+            "/usuario/**"
+
     };
 
     private static final String[] PUBLIC_MATCHERS_PUT = {
+            "/endereco/**",
+            "/doacao/**",
+            "/reserva/**",
+            "/paciente/**",
+            "/usuario/**"
+
     };
     private static final String[] PUBLIC_MATCHERS_DELETE = {
+            "/endereco/**",
+            "/doacao/**",
+            "/reserva/**",
+            "/paciente/**",
+            "/usuario/**"
     };
 
     @Override

@@ -38,8 +38,8 @@ public class FiltroAutorizacaoJWT extends BasicAuthenticationFilter {
                 response.sendError(401, "token inválido");
             }
 
-            chain.doFilter(request, response);
         }
+        chain.doFilter(request, response);
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request, String token) {
