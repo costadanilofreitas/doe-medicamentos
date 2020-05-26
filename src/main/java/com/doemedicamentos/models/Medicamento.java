@@ -23,6 +23,13 @@ public class Medicamento {
     public Medicamento() {
     }
 
+    public Medicamento(int id, @NotNull(message = "Nome do medicamento deve ser preenchido.") String nome, @NotNull(message = "Nome do laboratorio deve ser preenchido.") String laboratorio, @NotNull(message = "Remedio é controlado? TRUE ou FALSE.") boolean controlado) {
+        this.id = id;
+        this.nome = nome;
+        this.laboratorio = laboratorio;
+        this.controlado = controlado;
+    }
+
     public int getId() {
         return id;
     }
@@ -39,7 +46,7 @@ public class Medicamento {
         this.nome = nome;
     }
 
-    public String getLaboratorio(String bayer) {
+    public String getLaboratorio() {
         return laboratorio;
     }
 
@@ -47,12 +54,11 @@ public class Medicamento {
         this.laboratorio = laboratorio;
     }
 
-    public boolean isControlado(boolean b) {
+    public boolean isControlado() {
         return controlado;
     }
 
     public void setControlado(boolean controlado) {
         this.controlado = controlado;
     }
-
 }
