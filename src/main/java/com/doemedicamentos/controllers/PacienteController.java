@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Paciente")
+@RequestMapping("/paciente")
 public class PacienteController {
 
     @Autowired
