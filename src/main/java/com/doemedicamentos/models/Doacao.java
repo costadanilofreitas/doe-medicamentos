@@ -19,6 +19,9 @@ public class Doacao {
     @OneToOne
     private Medicamento medicamento;
 
+    @OneToOne
+    private Paciente paciente;
+
     public Doacao() {
     }
 
@@ -58,5 +61,13 @@ public class Doacao {
 
     public void setMedicamento(Medicamento medicamento) {
         this.medicamento = medicamento;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 }

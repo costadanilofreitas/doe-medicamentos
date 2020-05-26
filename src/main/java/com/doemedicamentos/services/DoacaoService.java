@@ -1,6 +1,7 @@
 package com.doemedicamentos.services;
 
 import com.doemedicamentos.models.Doacao;
+import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.repositories.DoacaoRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,14 @@ public class DoacaoService {
 
     @Autowired
     private DoacaoRepository doacaoRepository;
+
+    @Autowired
+    private PacienteService pacienteService;
+
+    public Paciente buscarPacientePorId(Integer id){
+
+        return pacienteService.buscarPacientePorId(id).get();
+    }
 
     public Doacao incluirDoacao(Doacao doacao){
         Date date = new Date();

@@ -1,6 +1,7 @@
 package com.doemedicamentos.controllers;
 
 import com.doemedicamentos.models.Doacao;
+import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.services.DoacaoService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,8 @@ public class DoacaoController {
 
     @PostMapping
     public ResponseEntity<Doacao> criarDoacao(@RequestBody @Validated Doacao doacao) throws InvalidAttributeValueException {
+        Paciente paciente = doacaoService.buscarPacientePorId(doacao.getPaciente().getIdPaciente());
+        doacao.setPaciente(paciente);
         Doacao doacaoObjeto = doacaoService.incluirDoacao(doacao);
         return ResponseEntity.status(201).body(doacaoObjeto);
     }
@@ -60,6 +63,8 @@ public class DoacaoController {
     public Doacao atualizarDoacao(@PathVariable Integer id, @RequestBody Doacao doacao) {
         doacao.setIdDocacao(id);
         try {
+            Paciente paciente = doacaoService.buscarPacientePorId(doacao.getPaciente().getIdPaciente());
+            doacao.setPaciente(paciente);
             Doacao doacaoObjeto = doacaoService.alterarDoacao(doacao);
             return doacaoObjeto;
         } catch (ObjectNotFoundException e) {
