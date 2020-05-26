@@ -29,14 +29,6 @@ public class Reserva{
     public Reserva() {
     }
 
-    public Reserva(String CRM, Date dataReceita, @NotNull(message = "Status deve estar preenchido.") StatusReserva status, Date data_baixa, Doacao doacao) {
-        this.CRM = CRM;
-        this.dataReceita = dataReceita;
-        this.status = status;
-        this.data_baixa = data_baixa;
-        this.doacao = doacao;
-    }
-
     public Paciente getPaciente() {
         return paciente;
     }
@@ -91,6 +83,14 @@ public class Reserva{
 
     public void setDoacao(Doacao doacao) {
         this.doacao = doacao;
+    }
+    public Reserva(String CRM, Date dataReceita, @NotNull(message = "Status deve estar preenchido.") StatusReserva status, Date data_baixa, @NotNull(message = "É necessário associar a reserva a uma doação.") Doacao doacao, @NotNull(message = "É necessário associar a reserva a um paciente.") Paciente paciente) {
+        this.CRM = CRM;
+        this.dataReceita = dataReceita;
+        this.status = status;
+        this.data_baixa = data_baixa;
+        this.doacao = doacao;
+        this.paciente = paciente;
     }
 }
 

@@ -3,8 +3,11 @@ package com.doemedicamentos.controllers;
 import com.doemedicamentos.enums.StatusReserva;
 import com.doemedicamentos.models.Doacao;
 import com.doemedicamentos.models.Medicamento;
+import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.models.Reserva;
+import com.doemedicamentos.security.JWTUtil;
 import com.doemedicamentos.services.ReservaService;
+import com.doemedicamentos.services.UsuarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
@@ -15,7 +18,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -28,7 +33,11 @@ import java.util.Date;
 import java.util.Optional;
 
 @WebMvcTest(ReservaController.class)
+@Import(JWTUtil.class)
 public class ReservaControllerTests {
+    @MockBean
+    private UsuarioService usuarioService;
+
     @MockBean
     ReservaService reservaService;
 
@@ -40,6 +49,7 @@ public class ReservaControllerTests {
     Reserva reserva;
     Doacao doacao;
     Medicamento medicamento;
+    Paciente paciente;
 
     @BeforeEach
     public void inicializar()throws ParseException {
@@ -53,10 +63,17 @@ public class ReservaControllerTests {
         medicamento.setControlado(true);
         medicamento.setLaboratorio("Biogen Brasil Produtos");
         doacao.setMedicamento(medicamento);
-        reserva = new Reserva("M45673", date, StatusReserva.RESERVADO, dataCadastro, doacao);
+        paciente = new Paciente();
+        paciente.setIdPaciente(1);
+        paciente.setDataNascimento(new SimpleDateFormat( "yyyyMMdd" ).parse( "20100520" ));
+        paciente.setEmail("teste@gmail.com");
+        paciente.setNome("Nome Paciente");
+        paciente.setTelefone("11999999999");
+        reserva = new Reserva("M45673", date, StatusReserva.RESERVADO, dataCadastro, doacao, paciente);
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarCriarReserva() throws Exception {
         reserva.setIdReserva(1);
         Mockito.when(reservaService.incluirReserva(Mockito.any(Reserva.class))).thenReturn(reserva);
@@ -69,6 +86,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarCriarReservaError() throws Exception {
         Mockito.when(reservaService.incluirReserva(Mockito.any(Reserva.class))).thenThrow(new ObjectNotFoundException("", "O remédio em questão é controloado, desta forma se faz necessário as informações do CRM do médio e a data da receita!" +
                 " Verifique se a reserva não foi FINALIZADA"));
@@ -79,6 +97,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarBuscarReservaPorId() throws Exception {
         reserva.setIdReserva(1);
         Optional<Reserva> reservaOptional = Optional.of(reserva);
@@ -92,6 +111,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarBuscarReservaPorIdErro() throws Exception {
         reserva.setIdReserva(1);
         Optional<Reserva> reservaOptional = Optional.of(reserva);
@@ -104,6 +124,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarAlterarReserva() throws Exception {
         reserva.setIdReserva(1);
         Reserva reservaAtualizado = new Reserva();
@@ -124,6 +145,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarAlterarReservaError() throws Exception {
         Mockito.when(reservaService.alterarReserva(Mockito.any(Reserva.class))).thenThrow(new ObjectNotFoundException("", "O remédio em questão é controloado, desta forma se faz necessário as informações do CRM do médio e a data da receita!" +
                 " Verifique se a reserva não foi FINALIZADA"));
@@ -134,6 +156,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarExcluirReserva() throws Exception {
         reserva.setIdReserva(1);
         Mockito.when(reservaService.buscarReservaPorId(Mockito.anyInt())).thenReturn(Optional.of(reserva));
@@ -149,6 +172,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarExcluirReservaError() throws Exception {
         reserva.setIdReserva(1);
         Mockito.when(reservaService.buscarReservaPorId(Mockito.anyInt())).thenReturn(Optional.of(reserva));
@@ -162,6 +186,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarFinalizarReserva() throws Exception {
         Reserva reserva1 = new Reserva();
         reserva1.setIdReserva(1);
@@ -176,6 +201,7 @@ public class ReservaControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "marianafelix@gmail.com", password = "senha")
     public void testarFinalizarReservaErro() throws Exception {
         Reserva reserva1 = new Reserva();
         reserva1.setIdReserva(1);
@@ -190,6 +216,4 @@ public class ReservaControllerTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status", CoreMatchers.equalTo("FINALIZADA")));
 
     }
-
-
 }

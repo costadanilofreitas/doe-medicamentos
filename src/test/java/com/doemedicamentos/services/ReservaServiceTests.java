@@ -3,6 +3,7 @@ package com.doemedicamentos.services;
 import com.doemedicamentos.enums.StatusReserva;
 import com.doemedicamentos.models.Doacao;
 import com.doemedicamentos.models.Medicamento;
+import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.models.Reserva;
 import com.doemedicamentos.repositories.ReservaRepository;
 import org.hibernate.ObjectNotFoundException;
@@ -31,6 +32,7 @@ public class ReservaServiceTests {
     Reserva reserva;
     Doacao doacao;
     Medicamento medicamento;
+    Paciente paciente;
 
     @BeforeEach
     public void inicializar()throws ParseException {
@@ -44,7 +46,13 @@ public class ReservaServiceTests {
         medicamento.setControlado(true);
         medicamento.setLaboratorio("Biogen Brasil Produtos");
         doacao.setMedicamento(medicamento);
-        reserva = new Reserva("M45673", date, StatusReserva.RESERVADO, dataCadastro, doacao);
+        paciente = new Paciente();
+        paciente.setIdPaciente(1);
+        paciente.setDataNascimento(new SimpleDateFormat( "yyyyMMdd" ).parse( "20100520" ));
+        paciente.setEmail("teste@gmail.com");
+        paciente.setNome("Nome Paciente");
+        paciente.setTelefone("11999999999");
+        reserva = new Reserva("M45673", date, StatusReserva.RESERVADO, dataCadastro, doacao, paciente);
     }
 
     @Test
