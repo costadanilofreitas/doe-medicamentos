@@ -32,8 +32,8 @@ public class MedicamentoServiceTests {
         medicamento = new Medicamento();
         medicamento.setId(1);
         medicamento.setNome("Aspirina");
-        medicamento.getLaboratorio("Bayer");
-        medicamento.isControlado(false);
+        medicamento.setLaboratorio("Bayer");
+        medicamento.setControlado(false);
     }
 
     @Test
@@ -87,8 +87,8 @@ public class MedicamentoServiceTests {
         Medicamento medicamento1 = new Medicamento();
         medicamento1.setId(2);
         medicamento1.setNome("Polaramine");
-        medicamento1.getLaboratorio("Roche");
-        medicamento1.isControlado(false);
+        medicamento1.setLaboratorio("Roche");
+        medicamento1.setControlado(false);
 
         Optional<Medicamento> medicamentoOptional = Optional.empty();
         Mockito.when(medicamentoRepository.findById(Mockito.anyInt())).thenReturn(medicamentoOptional);
