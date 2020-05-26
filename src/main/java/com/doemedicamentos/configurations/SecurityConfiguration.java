@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/medicamentos/**",
             "/reserva/**",
             "/paciente/**",
-            "/usuario/**"
+            "/usuario/**",
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {

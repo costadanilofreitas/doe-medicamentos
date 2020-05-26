@@ -17,8 +17,14 @@ public class Reserva{
     @NotNull(message = "Status deve estar preenchido.")
     private StatusReserva status;
     private Date data_baixa;
+
     @OneToOne
+    @NotNull(message = "É necessário associar a reserva a uma doação.")
     private Doacao doacao;
+
+    @OneToOne
+    @NotNull(message = "É necessário associar a reserva a um paciente.")
+    private Paciente paciente;
 
     public Reserva() {
     }
@@ -29,6 +35,14 @@ public class Reserva{
         this.status = status;
         this.data_baixa = data_baixa;
         this.doacao = doacao;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
     public Integer getIdReserva() {
