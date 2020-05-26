@@ -74,7 +74,7 @@ public class PacienteControllerTests {
 
         String json = mapper.writeValueAsString(paciente);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/Paciente")
+        mockMvc.perform(MockMvcRequestBuilders.post("/paciente")
             .contentType(MediaType.APPLICATION_JSON)
             .content(json))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nome", CoreMatchers.equalTo(paciente.getNome())))
@@ -89,7 +89,7 @@ public class PacienteControllerTests {
 
         Mockito.when(pacienteService.buscarPacientePorId(Mockito.anyInt())).thenReturn(pacienteOptional);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/Paciente/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/paciente/1")
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nome",CoreMatchers.equalTo(paciente.getNome())))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -103,7 +103,7 @@ public class PacienteControllerTests {
 
         Mockito.when(pacienteService.buscarPacientePorId(Mockito.anyInt())).thenReturn(pacienteOptional);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/Paciente/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/paciente/1")
             )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
@@ -120,7 +120,7 @@ public class PacienteControllerTests {
 
         String json = mapper.writeValueAsString(paciente);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/Paciente/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/paciente/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
         )
@@ -138,7 +138,7 @@ public class PacienteControllerTests {
 
         String json = mapper.writeValueAsString(paciente);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/Paciente/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/paciente/2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
         )
@@ -156,7 +156,7 @@ public class PacienteControllerTests {
         pacienteService.excluirPaciente(paciente);
         Mockito.verify(pacienteService).excluirPaciente(Mockito.any(Paciente.class));
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/Paciente/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/paciente/1"))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
 
     }
@@ -170,7 +170,7 @@ public class PacienteControllerTests {
         pacienteService.excluirPaciente(paciente);
         Mockito.verify(pacienteService).excluirPaciente(Mockito.any(Paciente.class));
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/Paciente/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/paciente/1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
     }
