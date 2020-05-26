@@ -1,5 +1,6 @@
 package com.doemedicamentos.services;
 
+import com.doemedicamentos.models.Endereco;
 import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.repositories.PacienteRepository;
 import org.hibernate.ObjectNotFoundException;
@@ -14,8 +15,18 @@ public class PacienteService {
     @Autowired
     PacienteRepository pacienteRepository;
 
-    //@Autowired
-    //EnderecoRepository enderecoRepository;
+    @Autowired
+    EnderecoService enderecoRepository;
+
+    public Endereco incluirEndereco(Endereco endereco){
+        Endereco enderecoObjeto = enderecoRepository.incluirEndereco(endereco);
+        return enderecoObjeto;
+    }
+
+    public Optional<Endereco> buscarEnderecoPorid(Integer id){
+        Optional<Endereco> enderecoOptional = enderecoRepository.buscarPorid(id);
+        return enderecoOptional;
+    }
 
     public Paciente incluirPaciente(Paciente paciente){
         Paciente pacienteObjeto = pacienteRepository.save(paciente);

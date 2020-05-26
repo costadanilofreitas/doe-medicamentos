@@ -1,9 +1,6 @@
 package com.doemedicamentos.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.xml.crypto.Data;
@@ -28,6 +25,9 @@ public class Paciente {
 
     @NotNull
     private Date dataNascimento;
+
+    @OneToOne
+    private Endereco endereco;
 
     public Paciente() {
     }
@@ -79,4 +79,13 @@ public class Paciente {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
 }

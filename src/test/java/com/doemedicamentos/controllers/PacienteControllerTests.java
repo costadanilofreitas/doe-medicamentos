@@ -1,5 +1,6 @@
 package com.doemedicamentos.controllers;
 
+import com.doemedicamentos.models.Endereco;
 import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.services.PacienteService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,6 +37,8 @@ public class PacienteControllerTests {
 
     Paciente paciente;
 
+    Endereco endereco;
+
     @BeforeEach
     public void Iniciar() throws ParseException {
         paciente = new Paciente();
@@ -44,10 +47,21 @@ public class PacienteControllerTests {
         paciente.setEmail("teste@gmail.com");
         paciente.setNome("Nome Paciente");
         paciente.setTelefone("11999999999");
+
+        endereco.setIdEndereco(1);
+        endereco.setEndereco("Rua Rio Grande do Norte");
+        endereco.setNumero("170");
+        endereco.setEstado("São Paulo");
+        endereco.setCidade("Santo André");
+        endereco.setComplemento("apartamento 42");
     }
 
     @Test
     public void testarIncluirPaciente() throws Exception {
+
+        Optional<Endereco> enderecoOptional = Optional.of(endereco);
+
+        Mockito.when(pacienteService.buscarEnderecoPorid(Mockito.anyInt())).thenReturn(enderecoOptional);
 
         Mockito.when(pacienteService.incluirPaciente(Mockito.any(Paciente.class))).thenReturn(paciente);
 

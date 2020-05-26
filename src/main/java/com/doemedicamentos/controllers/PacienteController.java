@@ -1,5 +1,6 @@
 package com.doemedicamentos.controllers;
 
+import com.doemedicamentos.models.Endereco;
 import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,17 @@ public class PacienteController {
 
     @PostMapping
     public ResponseEntity<Paciente> incluirPaciente(@RequestBody Paciente paciente){
+
+
+        Integer idEndereco = paciente.getEndereco().getIdEndereco();
+        if(idEndereco != null){
+            Optional<Endereco> endereco = pacienteService.buscarEnderecoPorid(idEndereco);
+            paciente.setEndereco(endereco.get());
+        }
+        else if(paciente.getEndereco().getEndereco() != null){
+            Endereco endereco = pacienteService.incluirEndereco(paciente.getEndereco());
+            paciente.setEndereco(endereco);
+        }
 
         Paciente pacienteObject = pacienteService.incluirPaciente(paciente);
 
