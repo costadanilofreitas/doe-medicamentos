@@ -103,6 +103,8 @@ public class PacienteControllerTests {
 
         paciente.setNome("Teste Alterar Nome");
 
+        Mockito.when(pacienteService.vincularEndereco(Mockito.any(Endereco.class))).thenReturn(endereco);
+
         Mockito.when(pacienteService.alterarPaciente(Mockito.any(Paciente.class))).thenReturn(paciente);
 
         String json = mapper.writeValueAsString(paciente);

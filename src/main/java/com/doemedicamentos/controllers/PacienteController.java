@@ -46,6 +46,8 @@ public class PacienteController {
     public ResponseEntity<Paciente> alterarPaciente(@RequestBody Paciente paciente, @PathVariable Integer id){
 
         try {
+            Endereco endereco = pacienteService.vincularEndereco(paciente.getEndereco());
+            paciente.setEndereco(endereco);
             paciente.setIdPaciente(id);
             Paciente pacienteObject = pacienteService.alterarPaciente(paciente);
             return ResponseEntity.status(200).body(pacienteObject);
