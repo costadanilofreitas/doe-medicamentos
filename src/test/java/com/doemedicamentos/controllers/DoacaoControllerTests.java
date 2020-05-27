@@ -1,26 +1,19 @@
 package com.doemedicamentos.controllers;
 
 import com.doemedicamentos.models.Doacao;
-import com.doemedicamentos.models.Endereco;
 import com.doemedicamentos.models.Medicamento;
-import com.doemedicamentos.models.Paciente;
-import com.doemedicamentos.security.JWTUtil;
 import com.doemedicamentos.services.DoacaoService;
-import com.doemedicamentos.services.UsuarioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
-import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -34,13 +27,9 @@ import java.util.List;
 import java.util.Optional;
 
 @WebMvcTest(DoacaoController.class)
-@Import(JWTUtil.class)
 public class DoacaoControllerTests {
     @MockBean
     DoacaoService doacaoService;
-
-    @MockBean
-    private UsuarioService usuarioService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -49,7 +38,6 @@ public class DoacaoControllerTests {
 
     Doacao doacao;
     Medicamento medicamento;
-    Paciente paciente;
 
     @BeforeEach
     public void inicializar() throws ParseException {
@@ -65,17 +53,9 @@ public class DoacaoControllerTests {
         medicamento.setControlado(true);
         medicamento.setLaboratorio("Biogen Brasil Produtos");
         doacao.setMedicamento(medicamento);
-        paciente = new Paciente();
-        paciente.setIdPaciente(1);
-        paciente.setDataNascimento(new SimpleDateFormat( "yyyyMMdd" ).parse( "20100520" ));
-        paciente.setEmail("teste@gmail.com");
-        paciente.setNome("Nome Paciente");
-        paciente.setTelefone("11999999999");
-        doacao.setPaciente(paciente);
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarDoacaoPorId() throws Exception {
         doacao.setIdDocacao(1);
         Optional<Doacao> doacaoOptional = Optional.of(doacao);
@@ -89,7 +69,6 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarDoacaoPorIdErro() throws Exception {
         doacao.setIdDocacao(1);
         Optional<Doacao> doacaoOptional = Optional.of(doacao);
@@ -102,7 +81,6 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarTodasDoacoes() throws Exception {
         Iterable<Doacao> listDocao = Arrays.asList();
         Mockito.when(doacaoService.buscarTodasDoacoes()).thenReturn(listDocao);
@@ -116,7 +94,6 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarTodasDoacoesError() throws Exception {
         Iterable<Doacao> listDocao = Arrays.asList();
         Mockito.when(doacaoService.buscarTodasDoacoes()).thenThrow(new RuntimeException());
@@ -129,7 +106,6 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarDoacaoPorMedicamentoId() throws Exception {
         doacao.setIdDocacao(1);
         List<Doacao> listDocao = Arrays.asList(doacao);
@@ -144,7 +120,6 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarDoacaoPorMedicamentoIdErro() throws Exception {
         doacao.setIdDocacao(1);
         List<Doacao> listDocao = Arrays.asList();
@@ -158,10 +133,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarCriarDoacao() throws Exception {
-
-        Mockito.when(doacaoService.buscarPacientePorId(Mockito.anyInt())).thenReturn(paciente);
         doacao.setIdDocacao(1);
         Mockito.when(doacaoService.incluirDoacao(Mockito.any(Doacao.class))).thenReturn(doacao);
         String json = mapper.writeValueAsString(doacao);
@@ -172,9 +144,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarAtualizarDoacao() throws Exception {
-        Mockito.when(doacaoService.buscarPacientePorId(Mockito.anyInt())).thenReturn(paciente);
         doacao.setIdDocacao(1);
         Optional<Doacao> retorno = Optional.of(doacao);
         Doacao doacaoComAlteracao = new Doacao();
@@ -193,27 +163,6 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
-    public void testarAtualizarDoacaoInexistente() throws Exception {
-        Mockito.when(doacaoService.buscarPacientePorId(Mockito.anyInt())).thenReturn(paciente);
-        doacao.setIdDocacao(1);
-        Optional<Doacao> retorno = Optional.of(doacao);
-        Doacao doacaoComAlteracao = new Doacao();
-        doacaoComAlteracao = doacao;
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
-        Date date = (Date) formatter.parse("09/28/20");
-        doacaoComAlteracao.setDataValidade(date);
-        doacaoComAlteracao.setIdDocacao(2);
-        Mockito.when(doacaoService.alterarDoacao(Mockito.any(Doacao.class))).thenThrow(new ObjectNotFoundException(Paciente.class, "Doação não encontrada."));
-        String json = mapper.writeValueAsString(doacaoComAlteracao);
-
-        mockMvc.perform(MockMvcRequestBuilders.put("/doacao/2")
-                .contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-    }
-
-    @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarDeletarDoacao() throws Exception {
         doacao.setIdDocacao(1);
         Mockito.when(doacaoService.buscarDoacaoPorId(Mockito.anyInt())).thenReturn(Optional.of(doacao));
@@ -229,15 +178,16 @@ public class DoacaoControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarDeletarLeadError() throws Exception {
         doacao.setIdDocacao(1);
-        Mockito.when(doacaoService.buscarDoacaoPorId(Mockito.anyInt())).thenReturn(Optional.empty());
+        Mockito.when(doacaoService.buscarDoacaoPorId(Mockito.anyInt())).thenReturn(Optional.of(doacao));
         String json = mapper.writeValueAsString(doacao);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/doacao/2")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/doacao/0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+        Mockito.verify(doacaoService, Mockito.times(1)).excluirDoacao(doacao);
     }
 }
