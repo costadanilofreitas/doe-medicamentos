@@ -1,0 +1,867 @@
+{
+	"info": {
+		"_postman_id": "ef323ee0-8478-461c-8299-56a58f802a8c",
+		"name": "DoeMedicamentosAWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Endereco",
+			"item": [
+				{
+					"name": "Buscar todos enderecos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/todosenderecos",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"todosenderecos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar endereco por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/1",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://18.230.155.76:8080/endereco/2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/2",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Incluir endereco",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"endereco\": \"rua das camelias\",\n\t\"numero\": 101,\n\t\"complemento\": \"apartamento 122\",\n\t\"cidade\": \"São Paulo\",\n\t\"estado\": \"São Paulo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/incluir",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar endereco",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"endereco\": \"Rua das Camelias\",\n\t\"numero\": 125,\n\t\"complemento\": \"apartamento 122\",\n\t\"cidade\": \"São Paulo\",\n\t\"estado\": \"São Paulo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/2",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar endereco",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"endereco\": \"Rua das Camelias\",\n\t\"numero\": 125,\n\t\"complemento\": \"apartamento 122\",\n\t\"cidade\": \"São Paulo\",\n\t\"estado\": \"São Paulo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/1",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar endereco por estado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"estado\": \"São Paulo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/estado",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar endereco por cidade e estado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"estado\": \"São Paulo\",\n\t\"cidade\": \"São Paulo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/estadocidade",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"estadocidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar endereco por cidade",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cidade\": \"São Paulo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/endereco/cidade",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"cidade"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Medicamento",
+			"item": [
+				{
+					"name": "Incluir medicamento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"Aspirina\",\n\t\"laboratorio\":\"Bayer\",\n\t\"controlado\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "18.230.155.76:8080/medicamentos",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"medicamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar todos medicamentos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:8080/medicamentos",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"medicamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar medicamentopor Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:8080/medicamentos/1",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"medicamentos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar medicamendo",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Vitamina B12\",\n    \"laboratorio\": \"Roche\",\n    \"controlado\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "18.230.155.76:8080/medicamentos/6",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"medicamentos",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar medicamento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:8080/medicamentos/6",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"medicamentos",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Doacao",
+			"item": [
+				{
+					"name": "Incluir doacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"dataValidade\" : \"2020-11-30T12:00\",\n\"dataCadastro\" : \"2020-05-15T12:00\",\n\"medicamento\" : {\n\t\t\t\t\t\"id\" : 1\n\t\t\t\t},\n\"paciente\" :\t{\n\t\t\t\t\t\"idPaciente\" :1\n\t\t\t\t}\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "18.230.155.76:8080/doacao",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"doacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar todas doacoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:8080/doacao/1",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"doacao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar doacao por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:8080/doacao/1",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"doacao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar doacao por Medicamento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:8080/doacao/buscarDoacaoPorMedicamento/1",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"doacao",
+								"buscarDoacaoPorMedicamento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar doacao",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"dataValidade\": \"2020-12-30T12:00\",\n\"dataCadastro\": \"2020-05-20T12:00\",\n\"medicamento\": {\n\t\t\t\t\"id\": 2,\n\t\t\t\t\"nome\": \"Aspirina\",\n\t\t\t\t\"laboratorio\": \"Bayer\",\n\t\t\t\t\"controlado\": false\n\t\t\t\t},\n\"paciente\" :\t{\n\t\t\t\t\t\"idPaciente\" :1\n\t\t\t\t}\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "18.230.155.76:8080/doacao/2",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"doacao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar doacao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Paciente",
+			"item": [
+				{
+					"name": "Incluir paciente e endereco",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"nome\": \"Nome Teste\",\n\"telefone\": \"1199999999\",\n\"email\": \"emailpaciente@gmail.com\",\n\"dataNascimento\": \"1991-01-01\",\n\"endereco\" : {\n\"endereco\" : \"teste \",\n\"numero\" : \"170\",\n\"complemento\" : \"compl\",\n\"cidade\" : \"Santo André\",\n\"estado\" : \"São Paulo\"\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "18.230.155.76:8080/paciente",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"paciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar paciente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:8080/paciente/1",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"paciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza paciente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"nome\": \"Nome Paciente Atualizar\",\n\"telefone\": \"1199999999\",\n\"email\": \"emailpaciente@gmail.com\",\n\"dataNascimento\": \"1991-12-28\",\n\"endereco\" : {\n\"endereco\" : \"teste de novo endenreco\",\n\"numero\" : \"170\",\n\"complemento\" : \"compl\",\n\"cidade\" : \"São Paulo\",\n\"estado\" : \"São Paulo\"\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "18.230.155.76:8080/paciente/1",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"paciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar paciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:8080/paciente/2",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"paciente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Reserva",
+			"item": [
+				{
+					"name": "Incluir Reserva",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"status\":\"RESERVADO\",\n\t\"doacao\":{\n    \t\"idDocacao\": 1,\n    \t\"dataValidade\": \"2020-12-31T12:00:00.000+0000\",\n    \t\"dataCadastro\": \"2020-01-31T12:00:00.000+0000\",\n    \t\"medicamento\": {\n        \t\"id\": 1,\n        \t\"nome\": \"Aspirina\",\n        \t\"laboratorio\": \"Bayer\",\n        \t\"controlado\": false \n    \t}\n    },\n    \"paciente\":{\n    \t\"idPaciente\": 1,\n    \t\"nome\": \"Nome Teste\",\n    \t\"email\": \"emailpaciente@gmail.com\",\n    \t\"telefone\": \"1199999999\",\n    \t\"dataNascimento\": \"1991-01-01T00:00:00.000+0000\",\n    \t\"endereco\": {\n        \t\"idEndereco\": 1,\n        \t\"endereco\": \"teste \",\n        \t\"numero\": \"170\",\n        \t\"complemento\": \"compl\",\n        \t\"cidade\": \"Santo André\",\n        \t\"estado\": \"São Paulo\"\n    \t}\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/reserva",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"reserva"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar reserva",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idReserva\": 1,\n    \"dataReceita\": null,\n    \"status\": \"FINALIZADA\",\n    \"data_baixa\": null,\n    \"doacao\": {\n        \"idDocacao\": 1,\n        \"dataValidade\": \"2020-12-31T12:00:00.000+0000\",\n        \"dataCadastro\": \"2020-01-31T12:00:00.000+0000\",\n        \"medicamento\": {\n            \"id\": 1,\n            \"nome\": \"Aspirina\",\n            \"laboratorio\": \"Bayer\",\n            \"controlado\": false\n        }\n    },\n    \"paciente\": {\n        \"idPaciente\": 1,\n        \"nome\": \"Nome Teste\",\n        \"email\": \"emailpaciente@gmail.com\",\n        \"telefone\": \"1199999999\",\n        \"dataNascimento\": \"1991-01-01T00:00:00.000+0000\",\n        \"endereco\": {\n            \"idEndereco\": 1,\n            \"endereco\": \"teste \",\n            \"numero\": \"170\",\n            \"complemento\": \"compl\",\n            \"cidade\": \"Santo André\",\n            \"estado\": \"São Paulo\"\n        }\n    },\n    \"crm\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/reserva/finalizar/1",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"finalizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar reserva",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://18.230.155.76:8080/reserva/1",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Reserva",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://18.230.155.76:8080/reserva/1",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"reserva",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Usuario Copy",
+			"item": [
+				{
+					"name": "Registrar Usuário",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"Joao Augusto\",\n\t\"email\": \"joao@gmail.com\",\n\t\"senha\": \"12345\"\n}\t",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/usuario/registrar",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"joao@gmail.com\",\n\t\"senha\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://18.230.155.76:8080/login",
+							"protocol": "http",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
