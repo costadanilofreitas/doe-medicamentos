@@ -2,7 +2,9 @@ package com.doemedicamentos.controllers;
 
 import com.doemedicamentos.models.Doacao;
 import com.doemedicamentos.models.Medicamento;
+import com.doemedicamentos.security.JWTUtil;
 import com.doemedicamentos.services.DoacaoService;
+import com.doemedicamentos.services.UsuarioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
@@ -13,7 +15,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -27,9 +31,12 @@ import java.util.List;
 import java.util.Optional;
 
 @WebMvcTest(DoacaoController.class)
+@Import(JWTUtil.class)
 public class DoacaoControllerTests {
     @MockBean
     DoacaoService doacaoService;
+    @MockBean
+    UsuarioService usuarioService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -56,6 +63,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarDoacaoPorId() throws Exception {
         doacao.setIdDocacao(1);
         Optional<Doacao> doacaoOptional = Optional.of(doacao);
@@ -69,6 +77,8 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+
     public void testarBuscarDoacaoPorIdErro() throws Exception {
         doacao.setIdDocacao(1);
         Optional<Doacao> doacaoOptional = Optional.of(doacao);
@@ -81,6 +91,8 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+
     public void testarBuscarTodasDoacoes() throws Exception {
         Iterable<Doacao> listDocao = Arrays.asList();
         Mockito.when(doacaoService.buscarTodasDoacoes()).thenReturn(listDocao);
@@ -106,6 +118,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarDoacaoPorMedicamentoId() throws Exception {
         doacao.setIdDocacao(1);
         List<Doacao> listDocao = Arrays.asList(doacao);
@@ -120,6 +133,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarDoacaoPorMedicamentoIdErro() throws Exception {
         doacao.setIdDocacao(1);
         List<Doacao> listDocao = Arrays.asList();
@@ -133,6 +147,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarCriarDoacao() throws Exception {
         doacao.setIdDocacao(1);
         Mockito.when(doacaoService.incluirDoacao(Mockito.any(Doacao.class))).thenReturn(doacao);
@@ -144,6 +159,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarAtualizarDoacao() throws Exception {
         doacao.setIdDocacao(1);
         Optional<Doacao> retorno = Optional.of(doacao);
@@ -163,6 +179,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarDeletarDoacao() throws Exception {
         doacao.setIdDocacao(1);
         Mockito.when(doacaoService.buscarDoacaoPorId(Mockito.anyInt())).thenReturn(Optional.of(doacao));
@@ -178,6 +195,7 @@ public class DoacaoControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarDeletarLeadError() throws Exception {
         doacao.setIdDocacao(1);
         Mockito.when(doacaoService.buscarDoacaoPorId(Mockito.anyInt())).thenReturn(Optional.of(doacao));

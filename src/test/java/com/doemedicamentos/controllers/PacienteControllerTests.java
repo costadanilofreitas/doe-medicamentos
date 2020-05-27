@@ -2,8 +2,10 @@ package com.doemedicamentos.controllers;
 
 import com.doemedicamentos.models.Endereco;
 import com.doemedicamentos.models.Paciente;
+import com.doemedicamentos.security.JWTUtil;
 import com.doemedicamentos.services.EnderecoService;
 import com.doemedicamentos.services.PacienteService;
+import com.doemedicamentos.services.UsuarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
@@ -14,7 +16,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -24,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 @WebMvcTest(PacienteController.class)
+@Import(JWTUtil.class)
 public class PacienteControllerTests {
 
     @Autowired
@@ -31,6 +36,8 @@ public class PacienteControllerTests {
 
     @MockBean
     PacienteService pacienteService;
+    @MockBean
+    UsuarioService usuarioService;
 
     ObjectMapper mapper = new ObjectMapper();
 
@@ -58,6 +65,7 @@ public class PacienteControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarIncluirPaciente() throws Exception {
 
         Mockito.when(pacienteService.vincularEndereco(Mockito.any(Endereco.class))).thenReturn(endereco);
@@ -66,7 +74,7 @@ public class PacienteControllerTests {
 
         String json = mapper.writeValueAsString(paciente);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/Paciente")
+        mockMvc.perform(MockMvcRequestBuilders.post("/paciente")
             .contentType(MediaType.APPLICATION_JSON)
             .content(json))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nome", CoreMatchers.equalTo(paciente.getNome())))
@@ -74,31 +82,34 @@ public class PacienteControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarPacientePorId() throws Exception{
 
         Optional<Paciente> pacienteOptional = Optional.of(paciente);
 
         Mockito.when(pacienteService.buscarPacientePorId(Mockito.anyInt())).thenReturn(pacienteOptional);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/Paciente/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/paciente/1")
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nome",CoreMatchers.equalTo(paciente.getNome())))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarBuscarPacienteIdInexistente() throws Exception {
 
         Optional<Paciente> pacienteOptional = Optional.empty();
 
         Mockito.when(pacienteService.buscarPacientePorId(Mockito.anyInt())).thenReturn(pacienteOptional);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/Paciente/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/paciente/1")
             )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarAlterarPaciente() throws Exception{
 
         paciente.setNome("Teste Alterar Nome");
@@ -109,7 +120,7 @@ public class PacienteControllerTests {
 
         String json = mapper.writeValueAsString(paciente);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/Paciente/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/paciente/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
         )
@@ -118,6 +129,7 @@ public class PacienteControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarAlterarPacienteInexistente() throws Exception{
 
         paciente.setNome("Teste Alterar Nome");
@@ -126,7 +138,7 @@ public class PacienteControllerTests {
 
         String json = mapper.writeValueAsString(paciente);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/Paciente/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/paciente/2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
         )
@@ -134,6 +146,7 @@ public class PacienteControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarExcluirPaciente() throws Exception {
 
         Optional optionalPaciente = Optional.of(paciente);
@@ -143,12 +156,13 @@ public class PacienteControllerTests {
         pacienteService.excluirPaciente(paciente);
         Mockito.verify(pacienteService).excluirPaciente(Mockito.any(Paciente.class));
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/Paciente/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/paciente/1"))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
 
     }
 
     @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
     public void testarExcluirPacienteInexistente() throws Exception {
 
         Mockito.when(pacienteService.buscarPacientePorId(Mockito.anyInt())).thenThrow(new ObjectNotFoundException(Paciente.class, "Paciente não Encontrado"));
@@ -156,7 +170,7 @@ public class PacienteControllerTests {
         pacienteService.excluirPaciente(paciente);
         Mockito.verify(pacienteService).excluirPaciente(Mockito.any(Paciente.class));
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/Paciente/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/paciente/1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
     }

@@ -1,7 +1,9 @@
 package com.doemedicamentos.controllers;
 
 import com.doemedicamentos.models.Endereco;
+import com.doemedicamentos.security.JWTUtil;
 import com.doemedicamentos.services.EnderecoService;
+import com.doemedicamentos.services.UsuarioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +12,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -22,6 +26,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(EnderecoController.class)
+@Import(JWTUtil.class)
 public class EnderecoControllerTests {
 
     private static final String NUMERO_NAO_PODE_ESTAR_VAZIO = "o numero não pode estar Vazio";
@@ -31,6 +36,9 @@ public class EnderecoControllerTests {
 
     @MockBean
     private EnderecoService enderecoService;
+
+    @MockBean
+    private UsuarioService usuarioService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -50,7 +58,9 @@ public class EnderecoControllerTests {
 
     }
 
-    @Test public void testarBuscarTodosEnderecos() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarBuscarTodosEnderecos() throws Exception {
         Iterable<Endereco> enderecosIterable = Arrays.asList(endereco);
         Mockito.when(enderecoService.buscarEnderecos()).thenReturn(enderecosIterable);
 
@@ -62,7 +72,9 @@ public class EnderecoControllerTests {
 
     }
 
-    @Test public void testarBuscarEnderecoOK() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarBuscarEnderecoOK() throws Exception {
         Mockito.when(enderecoService.buscarPorid(Mockito.anyInt()))
                 .thenReturn(Optional.ofNullable(endereco));
 
@@ -75,7 +87,9 @@ public class EnderecoControllerTests {
                         .jsonPath("$.idEndereco", CoreMatchers.equalTo(1)));
 
     }
-    @Test public void testarBuscarEnderecoInexistente() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarBuscarEnderecoInexistente() throws Exception {
         Mockito.when(enderecoService.buscarPorid(Mockito.anyInt()))
                 .thenReturn(Optional.empty());
 
@@ -85,7 +99,9 @@ public class EnderecoControllerTests {
                 .andExpect(status().isNoContent());
     }
 
-    @Test public void testarIncluirEndereco() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarIncluirEndereco() throws Exception {
         Iterable<Endereco> enderecoIterable = Arrays.asList(endereco);
         Mockito.when(enderecoService.incluirEndereco(Mockito.any(Endereco.class))).thenReturn(endereco);
 
@@ -100,7 +116,9 @@ public class EnderecoControllerTests {
                         .jsonPath("$.idEndereco", CoreMatchers.equalTo(1)));
 
     }
-    @Test public void testarAlterarEndereco() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarAlterarEndereco() throws Exception {
         Mockito.when(enderecoService.buscarPorid(Mockito.anyInt()))
                 .thenReturn(Optional.ofNullable(endereco));
 
@@ -118,7 +136,9 @@ public class EnderecoControllerTests {
 
 
     }
-    @Test public void testarAlterarEnderecoInexistente() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarAlterarEnderecoInexistente() throws Exception {
         Mockito.when(enderecoService.buscarPorid(Mockito.anyInt()))
                 .thenReturn(Optional.empty());
 
@@ -136,7 +156,9 @@ public class EnderecoControllerTests {
 
     }
 
-    @Test public void testarExcluirEndereco() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarExcluirEndereco() throws Exception {
         Mockito.when(enderecoService.buscarPorid(Mockito.anyInt()))
                 .thenReturn(Optional.ofNullable(endereco));
 
@@ -154,7 +176,9 @@ public class EnderecoControllerTests {
 
 
     }
-    @Test public void testarExcluirEnderecoInexistente() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarExcluirEnderecoInexistente() throws Exception {
         Mockito.when(enderecoService.buscarPorid(Mockito.anyInt()))
                 .thenReturn(Optional.empty());
 
@@ -170,7 +194,9 @@ public class EnderecoControllerTests {
 
     }
 
-    @Test public void testarBuscarEnderecoPorEstado() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarBuscarEnderecoPorEstado() throws Exception {
         Iterable<Endereco> enderecosIterable = Arrays.asList(endereco);
         Mockito.when(enderecoService.buscarPorEstado(endereco.getEstado())).thenReturn(enderecosIterable);
 
@@ -183,7 +209,9 @@ public class EnderecoControllerTests {
                         .status().isOk());
 
     }
-    @Test public void testarBuscarEnderecoPorEstadoECidade() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarBuscarEnderecoPorEstadoECidade() throws Exception {
         Iterable<Endereco> enderecosIterable = Arrays.asList(endereco);
         Mockito.when(enderecoService.buscarPorEstadoECidade(endereco.getEstado(), endereco.getCidade()))
                 .thenReturn(enderecosIterable);
@@ -197,7 +225,9 @@ public class EnderecoControllerTests {
                         .status().isOk());
 
     }
-    @Test public void testarBuscarEnderecoPorCidade() throws Exception {
+    @Test
+    @WithMockUser(username = "usuario@gmail.com", password = "aviao11")
+    public void testarBuscarEnderecoPorCidade() throws Exception {
         Iterable<Endereco> enderecosIterable = Arrays.asList(endereco);
         Mockito.when(enderecoService.buscarPorCidade(endereco.getCidade()))
                 .thenReturn(enderecosIterable);
