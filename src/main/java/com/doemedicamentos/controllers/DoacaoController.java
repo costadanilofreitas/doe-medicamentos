@@ -79,7 +79,7 @@ public class DoacaoController {
             doacaoService.excluirDoacao(doacaoOptional.get());
             return ResponseEntity.status(204).body(doacaoOptional.get());
         }
-        throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Doação não encontrada!");
     }
 
 }

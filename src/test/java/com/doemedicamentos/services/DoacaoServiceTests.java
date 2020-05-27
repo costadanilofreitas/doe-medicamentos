@@ -133,21 +133,11 @@ public class DoacaoServiceTests {
     }
 
     @Test
-    public void testarDeletarDoacaoInexistente(){
-        Optional<Doacao> retornoEmpty = Optional.empty();
-        Mockito.when(doacaoRepository.findById(Mockito.anyInt())).thenReturn(retornoEmpty);
-        Mockito.when(doacaoService.buscarDoacaoPorId(Mockito.anyInt())).thenReturn(retornoEmpty);
-        doacao.setIdDocacao(2);
-        Assertions.assertThrows(ObjectNotFoundException.class, () -> { doacaoService.excluirDoacao(doacao);});
-    }
-
-    @Test
     public void testarBuscarDoacaoPorMedicamento(){
         Mockito.when(doacaoRepository.findAll()).thenReturn(Arrays.asList(doacao));
         List<Doacao> doacaos = doacaoService.buscarDoacaoPorMedicamento(1);
         Assertions.assertEquals(1, doacaos.size());
         Assertions.assertEquals("Tecfidera", doacaos.get(0).getMedicamento().getNome());
-
     }
 
     @Test

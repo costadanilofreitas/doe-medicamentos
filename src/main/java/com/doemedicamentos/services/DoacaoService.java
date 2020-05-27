@@ -56,18 +56,7 @@ public class DoacaoService {
         }
     }
 
-    public void excluirDoacao(Doacao doacao){
-
-        Optional<Doacao> optionalDoacao = buscarDoacaoPorId(doacao.getIdDocacao());
-
-        if(optionalDoacao.isPresent()){
-            doacaoRepository.delete(doacao);;
-        }
-        else {
-            throw new ObjectNotFoundException(Paciente.class, "Doação não encontrada.");
-        }
-
-    }
+    public void excluirDoacao(Doacao doacao){ doacaoRepository.delete(doacao);}
 
     public List<Doacao> buscarDoacaoPorMedicamento(int idMedicacao){
         Iterable<Doacao> doacaoAll = doacaoRepository.findAll();
