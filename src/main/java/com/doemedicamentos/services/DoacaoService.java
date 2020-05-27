@@ -23,7 +23,9 @@ public class DoacaoService {
 
     public Paciente buscarPacientePorId(Integer id){
 
-        return pacienteService.buscarPacientePorId(id).get();
+        Optional<Paciente> paciente = pacienteService.buscarPacientePorId(id);
+
+        return paciente.get();
     }
 
     public Doacao incluirDoacao(Doacao doacao){
@@ -43,11 +45,28 @@ public class DoacaoService {
     }
 
     public Doacao alterarDoacao(Doacao doacao){
-        return  doacaoRepository.save(doacao);
+
+        Optional<Doacao> optionalDoacao = buscarDoacaoPorId(doacao.getIdDocacao());
+
+        if(optionalDoacao.isPresent()){
+            return  doacaoRepository.save(doacao);
+        }
+        else {
+            throw new ObjectNotFoundException(Paciente.class, "Doação não encontrada.");
+        }
     }
 
     public void excluirDoacao(Doacao doacao){
-        doacaoRepository.delete(doacao);
+
+        Optional<Doacao> optionalDoacao = buscarDoacaoPorId(doacao.getIdDocacao());
+
+        if(optionalDoacao.isPresent()){
+            doacaoRepository.delete(doacao);;
+        }
+        else {
+            throw new ObjectNotFoundException(Paciente.class, "Doação não encontrada.");
+        }
+
     }
 
     public List<Doacao> buscarDoacaoPorMedicamento(int idMedicacao){

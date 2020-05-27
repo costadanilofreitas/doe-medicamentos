@@ -68,7 +68,7 @@ public class DoacaoController {
             Doacao doacaoObjeto = doacaoService.alterarDoacao(doacao);
             return doacaoObjeto;
         } catch (ObjectNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 

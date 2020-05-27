@@ -1,5 +1,6 @@
 package com.doemedicamentos.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,8 +12,10 @@ public class Doacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDocacao;
+    @JsonFormat(pattern="yyyy-MM-dd")
     @NotNull(message = "Data de vencimento do medicamento deve ser preenchida.")
     private Date dataValidade;
+    @JsonFormat(pattern="yyyy-MM-dd")
     @NotNull(message = "Data do cadastro do medicamento deve ser preenchida.")
     private Date dataCadastro;
 
