@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://18.230.155.76:8080/endereco/todosenderecos",
+							"raw": "http://18.230.155.76:80/endereco/todosenderecos",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -22,7 +22,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"endereco",
 								"todosenderecos"
@@ -37,7 +37,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://18.230.155.76:8080/endereco/1",
+							"raw": "http://18.230.155.76:80/endereco/1",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -45,7 +45,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"endereco",
 								"1"
@@ -92,7 +92,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/endereco/incluir",
+							"raw": "http://18.230.155.76:80/endereco/incluir",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -100,7 +100,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"endereco",
 								"incluir"
@@ -124,7 +124,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/endereco/2",
+							"raw": "http://18.230.155.76:80/endereco/2",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -132,7 +132,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"endereco",
 								"2"
@@ -156,7 +156,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/endereco/1",
+							"raw": "http://18.230.155.76:80/endereco/1",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -164,7 +164,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"endereco",
 								"1"
@@ -188,7 +188,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/endereco/estado",
+							"raw": "http://18.230.155.76:80/endereco/estado",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -196,7 +196,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"endereco",
 								"estado"
@@ -220,7 +220,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/endereco/estadocidade",
+							"raw": "http://18.230.155.76:80/endereco/estadocidade",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -228,7 +228,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"endereco",
 								"estadocidade"
@@ -252,7 +252,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/endereco/cidade",
+							"raw": "http://18.230.155.76:80/endereco/cidade",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -260,7 +260,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"endereco",
 								"cidade"
@@ -278,6 +278,16 @@
 				{
 					"name": "Incluir medicamento",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGdtYWlsLmNvbSIsImV4cCI6MTU5MDU5MDU5Nn0.dQ9SUq89ukEW5ImwKz5phXV_WyQEkWTYujSI8xPMalim7euC8kE1bw0e876YoiqmzGFT38Q_nSJLWgG9UNX07g",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -297,14 +307,14 @@
 							}
 						},
 						"url": {
-							"raw": "18.230.155.76:8080/medicamentos",
+							"raw": "18.230.155.76:80/medicamentos",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"medicamentos"
 							]
@@ -318,14 +328,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "18.230.155.76:8080/medicamentos",
+							"raw": "18.230.155.76:80/medicamentos",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"medicamentos"
 							]
@@ -339,14 +349,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "18.230.155.76:8080/medicamentos/1",
+							"raw": "18.230.155.76:80/medicamentos/1",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"medicamentos",
 								"1"
@@ -377,14 +387,14 @@
 							}
 						},
 						"url": {
-							"raw": "18.230.155.76:8080/medicamentos/6",
+							"raw": "18.230.155.76:80/medicamentos/6",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"medicamentos",
 								"6"
@@ -399,14 +409,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "18.230.155.76:8080/medicamentos/6",
+							"raw": "18.230.155.76:80/medicamentos/6",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"medicamentos",
 								"6"
@@ -436,38 +446,16 @@
 							}
 						},
 						"url": {
-							"raw": "18.230.155.76:8080/doacao",
+							"raw": "18.230.155.76:80/doacao",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"doacao"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar todas doacoes",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "18.230.155.76:8080/doacao/1",
-							"host": [
-								"18",
-								"230",
-								"155",
-								"76"
-							],
-							"port": "8080",
-							"path": [
-								"doacao",
-								"1"
 							]
 						}
 					},
@@ -479,17 +467,38 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "18.230.155.76:8080/doacao/1",
+							"raw": "18.230.155.76:80/doacao/1",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"doacao",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar todas doacoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "18.230.155.76:80/doacao",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "80",
+							"path": [
+								"doacao"
 							]
 						}
 					},
@@ -501,14 +510,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "18.230.155.76:8080/doacao/buscarDoacaoPorMedicamento/1",
+							"raw": "18.230.155.76:80/doacao/buscarDoacaoPorMedicamento/1",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"doacao",
 								"buscarDoacaoPorMedicamento",
@@ -533,14 +542,14 @@
 							}
 						},
 						"url": {
-							"raw": "18.230.155.76:8080/doacao/2",
+							"raw": "18.230.155.76:80/doacao/2",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"doacao",
 								"2"
@@ -552,10 +561,21 @@
 				{
 					"name": "Deletar doacao",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "18.230.155.76:80/doacao/2",
+							"host": [
+								"18",
+								"230",
+								"155",
+								"76"
+							],
+							"port": "80",
+							"path": [
+								"doacao",
+								"2"
+							]
 						}
 					},
 					"response": []
@@ -581,14 +601,14 @@
 							}
 						},
 						"url": {
-							"raw": "18.230.155.76:8080/paciente",
+							"raw": "18.230.155.76:80/paciente",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"paciente"
 							]
@@ -602,14 +622,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "18.230.155.76:8080/paciente/1",
+							"raw": "18.230.155.76:80/paciente/1",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"paciente",
 								"1"
@@ -633,14 +653,14 @@
 							}
 						},
 						"url": {
-							"raw": "18.230.155.76:8080/paciente/1",
+							"raw": "18.230.155.76:80/paciente/1",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"paciente",
 								"1"
@@ -655,14 +675,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "18.230.155.76:8080/paciente/2",
+							"raw": "18.230.155.76:80/paciente/2",
 							"host": [
 								"18",
 								"230",
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"paciente",
 								"2"
@@ -692,7 +712,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/reserva",
+							"raw": "http://18.230.155.76:80/reserva",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -700,7 +720,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"reserva"
 							]
@@ -723,7 +743,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/reserva/finalizar/1",
+							"raw": "http://18.230.155.76:80/reserva/finalizar/1",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -731,7 +751,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"reserva",
 								"finalizar",
@@ -747,7 +767,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://18.230.155.76:8080/reserva/1",
+							"raw": "http://18.230.155.76:80/reserva/1",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -755,7 +775,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"reserva",
 								"1"
@@ -770,7 +790,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://18.230.155.76:8080/reserva/1",
+							"raw": "http://18.230.155.76:80/reserva/1",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -778,7 +798,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"reserva",
 								"1"
@@ -791,7 +811,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Usuario Copy",
+			"name": "Usuario",
 			"item": [
 				{
 					"name": "Registrar Usuário",
@@ -811,7 +831,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/usuario/registrar",
+							"raw": "http://18.230.155.76:80/usuario/registrar",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -819,7 +839,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"usuario",
 								"registrar"
@@ -843,7 +863,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://18.230.155.76:8080/login",
+							"raw": "http://18.230.155.76:80/login",
 							"protocol": "http",
 							"host": [
 								"18",
@@ -851,7 +871,7 @@
 								"155",
 								"76"
 							],
-							"port": "8080",
+							"port": "80",
 							"path": [
 								"login"
 							]
