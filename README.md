@@ -1,6 +1,7 @@
 #### **API REST Sistema Doe Medicamentos**
 
-No arquivo "DoeMedicamentos.postman_collection.json" é um arquivo do Postman. 
+No arquivo "DoeMedicamentos.postman_collection.json" é um arquivo do Postman para testes em localhost, e "DoeMedicamentosAWS.postman_collection.json". 
+para testes na máquina AWS informada abaixo.
 Nele contém uma Collection com todas as chamadas dpara o sistema.
 
 Este sistema usa o banco de dados MariaDB e para a criação do bancode dados deve usar o script abaixo:
@@ -290,5 +291,84 @@ Verbos:
      
        - Excluir doação
         URL: http://18.230.155.76:8080/doacao/<id>
+    
+
+**_Reserva_**:
+  
+       Atributos:
+       
+       **idReserva**: identificação da reserva
+       **CRM**:CRM do médico 
+       **dataReceita**: data de receida do remedio solicitado
+       **status**: Status da doação (RESERVADO, FINALIZADA)
+       **data_baixa**: Data que foi realizada a entrega do medicamento doado
+       **doacao**: Qual a doação que está sendo solicitada
+       **paciente**: Paciente que está realizando a reserva da doação
+                 
+   
+   URL: http://18.230.155.76:8080/reserva
+   
+   Verbos:
+    
+   **GET**:
+   
+         - Buscar reserva por id
+              URL: http://18.230.155.76:8080/reserva/<id>
+
+         
+   **POST**
+          
+       - Incluir reserva 
+       URL: http://18.230.155.76:8080/reserva
+       Body:
+               {
+               	"status":"RESERVADO",
+               	"doacao":{
+                   	        "idDocacao": Identificador da doação que está sendo reservada                         },
+                 "paciente":{
+                   	            "idPaciente": Identificador do paciente que está realizando a reserva
+                            }
+               	"CRM": "somente para remedios controlados"
+               	"dataReceita": "somente para remedios controlados"
+               }
+      
+       
+   **PUT**
+   
+       - Alterar reserva
+       URL: http://18.230.155.76:8080/reserva/<id>
+       Body:
+               {
+               	"status":"RESERVADO",
+               	"doacao":{
+                   	        "idDocacao": Identificador da doação que está sendo reservada                         },
+                 "paciente":{
+                   	            "idPaciente": Identificador do paciente que está realizando a reserva
+                            }
+               	"CRM": "somente para remedios controlados"
+               	"dataReceita": "somente para remedios controlados"
+               }
+               
+       - Finalizar reserva
+       URL: http://18.230.155.76:8080/reserva/finalizar<id>
+       Body:
+       data_baixa
+                      {
+                      	"status":"FINALIZADA",
+                      	"doacao":{
+                          	        "idDocacao": Identificador da doação que está sendo reservada                         },
+                        "paciente":{
+                          	            "idPaciente": Identificador do paciente que está realizando a reserva
+                                   }
+                      	"CRM": "somente para remedios controlados"
+                      	"dataReceita": "somente para remedios controlados"
+                      	"data_baixa": Data que foi entregue o remédio, caso não seja preenchida será a data da execução
+                      }
+       
+    
+   **DELETE**
+     
+       - Excluir reserva
+        URL: http://18.230.155.76:8080/reserva/<id>
     
         

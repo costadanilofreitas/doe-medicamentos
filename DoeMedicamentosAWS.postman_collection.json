@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "50763ef6-ccb1-45af-9b07-172401788843",
-		"name": "DoeMedicamentos-Localhost",
+		"_postman_id": "ef323ee0-8478-461c-8299-56a58f802a8c",
+		"name": "DoeMedicamentosAWS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -14,10 +14,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/endereco/todosenderecos",
+							"raw": "http://18.230.155.76:8080/endereco/todosenderecos",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -34,10 +37,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/endereco/1",
+							"raw": "http://18.230.155.76:8080/endereco/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -49,15 +55,18 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/endereco/2",
+					"name": "http://18.230.155.76:8080/endereco/2",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/endereco/2",
+							"raw": "http://18.230.155.76:8080/endereco/2",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -83,10 +92,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/endereco/incluir",
+							"raw": "http://18.230.155.76:8080/endereco/incluir",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -112,10 +124,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/endereco/2",
+							"raw": "http://18.230.155.76:8080/endereco/2",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -141,10 +156,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/endereco/1",
+							"raw": "http://18.230.155.76:8080/endereco/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -170,10 +188,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/endereco/estado",
+							"raw": "http://18.230.155.76:8080/endereco/estado",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -199,10 +220,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/endereco/estadocidade",
+							"raw": "http://18.230.155.76:8080/endereco/estadocidade",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -228,10 +252,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/endereco/cidade",
+							"raw": "http://18.230.155.76:8080/endereco/cidade",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -270,9 +297,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/medicamentos",
+							"raw": "18.230.155.76:8080/medicamentos",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -288,9 +318,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/medicamentos",
+							"raw": "18.230.155.76:8080/medicamentos",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -306,9 +339,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/medicamentos/1",
+							"raw": "18.230.155.76:8080/medicamentos/1",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -341,9 +377,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/medicamentos/6",
+							"raw": "18.230.155.76:8080/medicamentos/6",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -360,9 +399,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/medicamentos/6",
+							"raw": "18.230.155.76:8080/medicamentos/6",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -394,9 +436,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/doacao",
+							"raw": "18.230.155.76:8080/doacao",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -412,9 +457,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/doacao/1",
+							"raw": "18.230.155.76:8080/doacao/1",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -431,9 +479,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/doacao/1",
+							"raw": "18.230.155.76:8080/doacao/1",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -450,9 +501,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/doacao/buscarDoacaoPorMedicamento/1",
+							"raw": "18.230.155.76:8080/doacao/buscarDoacaoPorMedicamento/1",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -479,9 +533,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/doacao/2",
+							"raw": "18.230.155.76:8080/doacao/2",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -524,9 +581,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/paciente",
+							"raw": "18.230.155.76:8080/paciente",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -542,9 +602,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/paciente/1",
+							"raw": "18.230.155.76:8080/paciente/1",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -570,9 +633,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/paciente/1",
+							"raw": "18.230.155.76:8080/paciente/1",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -589,9 +655,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/paciente/2",
+							"raw": "18.230.155.76:8080/paciente/2",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -623,10 +692,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/reserva",
+							"raw": "http://18.230.155.76:8080/reserva",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -651,10 +723,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/reserva/finalizar/1",
+							"raw": "http://18.230.155.76:8080/reserva/finalizar/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -672,10 +747,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/reserva/1",
+							"raw": "http://18.230.155.76:8080/reserva/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -692,10 +770,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/reserva/1",
+							"raw": "http://18.230.155.76:8080/reserva/1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -710,7 +791,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Usuario",
+			"name": "Usuario Copy",
 			"item": [
 				{
 					"name": "Registrar Usuário",
@@ -730,9 +811,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuario/registrar",
+							"raw": "http://18.230.155.76:8080/usuario/registrar",
+							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
@@ -758,9 +843,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/login",
+							"raw": "http://18.230.155.76:8080/login",
+							"protocol": "http",
 							"host": [
-								"localhost"
+								"18",
+								"230",
+								"155",
+								"76"
 							],
 							"port": "8080",
 							"path": [
