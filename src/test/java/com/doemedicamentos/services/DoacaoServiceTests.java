@@ -2,7 +2,9 @@ package com.doemedicamentos.services;
 
 import com.doemedicamentos.models.Doacao;
 import com.doemedicamentos.models.Medicamento;
+import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.repositories.DoacaoRepository;
+import com.doemedicamentos.repositories.PacienteRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,11 +27,15 @@ public class DoacaoServiceTests {
     @MockBean
     DoacaoRepository doacaoRepository;
 
+    @MockBean
+    PacienteRepository pacienteRepository;
+
     @Autowired
     DoacaoService doacaoService;
 
     Doacao doacao;
     Medicamento medicamento;
+    Paciente paciente;
 
     @BeforeEach
     public void inicializar() throws ParseException{
@@ -45,6 +51,13 @@ public class DoacaoServiceTests {
         medicamento.setControlado(true);
         medicamento.setLaboratorio("Biogen Brasil Produtos");
         doacao.setMedicamento(medicamento);
+        paciente = new Paciente();
+        paciente.setIdPaciente(1);
+        paciente.setDataNascimento(new SimpleDateFormat( "yyyyMMdd" ).parse( "20100520" ));
+        paciente.setEmail("teste@gmail.com");
+        paciente.setNome("Nome Paciente");
+        paciente.setTelefone("11999999999");
+        doacao.setPaciente(paciente);
     }
 
     @Test
@@ -99,6 +112,20 @@ public class DoacaoServiceTests {
     }
 
     @Test
+    public void testarAlterarDoacaoInexistente()throws Exception{
+
+        Optional<Doacao> retornoEmpty = Optional.empty();
+        Mockito.when(doacaoRepository.findById(Mockito.anyInt())).thenReturn(retornoEmpty);
+        Mockito.when(doacaoService.buscarDoacaoPorId(Mockito.anyInt())).thenReturn(retornoEmpty);
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+        Date date = (Date)formatter.parse("09/28/20");
+        doacao.setDataCadastro(date);
+        doacao.setIdDocacao(10);
+        Mockito.when(doacaoRepository.save(Mockito.any(Doacao.class))).thenReturn(doacao);
+        Assertions.assertThrows(ObjectNotFoundException.class, () -> { doacaoService.alterarDoacao(doacao);});
+    }
+
+    @Test
     public void testarDeletarDoacao(){
         doacao.setIdDocacao(1);
         doacaoService.excluirDoacao(doacao);
@@ -111,6 +138,14 @@ public class DoacaoServiceTests {
         List<Doacao> doacaos = doacaoService.buscarDoacaoPorMedicamento(1);
         Assertions.assertEquals(1, doacaos.size());
         Assertions.assertEquals("Tecfidera", doacaos.get(0).getMedicamento().getNome());
+    }
 
+    @Test
+    public void testarBuscarPacientePorId(){
+
+        Optional<Paciente> pacienteOptional = Optional.of(paciente);
+        Mockito.when(pacienteRepository.findById(Mockito.anyInt())).thenReturn(pacienteOptional);
+        Paciente pacienteBusca = doacaoService.buscarPacientePorId(1);
+        Assertions.assertEquals(paciente.getNome(),pacienteBusca.getNome());
     }
 }

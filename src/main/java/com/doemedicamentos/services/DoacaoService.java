@@ -1,6 +1,7 @@
 package com.doemedicamentos.services;
 
 import com.doemedicamentos.models.Doacao;
+import com.doemedicamentos.models.Paciente;
 import com.doemedicamentos.repositories.DoacaoRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,16 @@ public class DoacaoService {
 
     @Autowired
     private DoacaoRepository doacaoRepository;
+
+    @Autowired
+    private PacienteService pacienteService;
+
+    public Paciente buscarPacientePorId(Integer id){
+
+        Optional<Paciente> paciente = pacienteService.buscarPacientePorId(id);
+
+        return paciente.get();
+    }
 
     public Doacao incluirDoacao(Doacao doacao){
         Date date = new Date();
@@ -34,12 +45,18 @@ public class DoacaoService {
     }
 
     public Doacao alterarDoacao(Doacao doacao){
-        return  doacaoRepository.save(doacao);
+
+        Optional<Doacao> optionalDoacao = buscarDoacaoPorId(doacao.getIdDocacao());
+
+        if(optionalDoacao.isPresent()){
+            return  doacaoRepository.save(doacao);
+        }
+        else {
+            throw new ObjectNotFoundException(Paciente.class, "Doação não encontrada.");
+        }
     }
 
-    public void excluirDoacao(Doacao doacao){
-        doacaoRepository.delete(doacao);
-    }
+    public void excluirDoacao(Doacao doacao){ doacaoRepository.delete(doacao);}
 
     public List<Doacao> buscarDoacaoPorMedicamento(int idMedicacao){
         Iterable<Doacao> doacaoAll = doacaoRepository.findAll();
